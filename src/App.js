@@ -9,7 +9,6 @@ class App extends Component {
 
     this.state = {
       color: {r: 210, g: 82, b: 230, a: 0.8},
-      unicorned: false,
     }
   }
 
@@ -35,6 +34,10 @@ class App extends Component {
     return false;
   }
 
+  colorText() {
+    return `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`;
+  }
+
   render() {
     return (
       <AppBody color={this.state.color} unicorned={this.unicorned()}>
@@ -44,8 +47,8 @@ class App extends Component {
         <BigWrapper>
           <Wrapper>
             <BrickBox>
-              <Brick color={this.state.color} />
-              rgba({this.state.color.r}, {this.state.color.g}, {this.state.color.b}, {this.state.color.a})
+              <Brick color={this.state.color} unicorned={this.unicorned()}/>
+              <div>{this.unicorned() ? "Unicorned!" : this.colorText()}</div>
             </BrickBox>
             <StyledSlider max={255} value={this.state.color.r} onChange={(x) => this.changeR(x)} />
             red: {this.state.color.r}
@@ -129,6 +132,9 @@ const Brick = styled(Flex)`
   box-shadow: 1px 1px 10px grey;
   ${props => props.color && `
     background-color: rgba(${props.color.r}, ${props.color.g}, ${props.color.b}, ${props.color.a});
+  `}
+  ${props => props.unicorned && `
+    background-image: linear-gradient(to bottom right, #FF6CC5,#FFC9F3,#B1F6E3,#F7FFB4,#DECCFE);
   `}
 `
 const StyledSlider = styled(Slider)`
