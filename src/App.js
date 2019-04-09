@@ -117,6 +117,7 @@ const Brick = styled(Flex)`
   flex-direction: column;
   margin: 20px;
   border-radius: 3%;
+  box-shadow: 1px 1px 10px grey;
   ${props => props.color && `
     background-color: rgba(${props.color.r}, ${props.color.g}, ${props.color.b}, ${props.color.a});
   `}
